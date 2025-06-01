@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <span>Gestion de Stock</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button *ngIf="authService.isAuthenticated()" routerLink="/products">Produits</button>
+    <button mat-button *ngIf="authService.isAuthenticated()" routerLink="/stock/movement">Mouvements</button>
+    <button mat-button *ngIf="authService.isAuthenticated()" routerLink="/stock/alerts">Alertes</button>
+
+    <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">Déconnexion</button>
+</mat-toolbar>

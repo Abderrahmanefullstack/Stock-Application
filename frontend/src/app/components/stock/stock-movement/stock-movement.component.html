@@ -1,0 +1,48 @@
+<div class="container">
+    <h2>Mouvement de Stock</h2>
+
+    <form [formGroup]="movementForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Produit</mat-label>
+            <mat-select formControlName="produitId" required>
+                <mat-option *ngFor="let product of products" [value]="product._id">
+                    {{ product.nom }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="movementForm.get('produitId')?.hasError('required')">
+                Produit requis
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type" required>
+                <mat-option *ngFor="let type of movementTypes" [value]="type.value">
+                    {{ type.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Quantité</mat-label>
+            <input matInput type="number" formControlName="quantite">
+            <mat-error *ngIf="movementForm.get('quantite')?.hasError('required')">
+                Quantité requise
+            </mat-error>
+            <mat-error *ngIf="movementForm.get('quantite')?.hasError('min')">
+                La quantité doit être positive
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="movementForm.invalid">
+            Enregistrer
+        </button>
+    </form>
+</div>

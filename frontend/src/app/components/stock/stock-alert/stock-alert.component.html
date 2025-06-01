@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Alertes de Stock</h2>
+
+    <mat-table [dataSource]="alerts" *ngIf="alerts.length > 0">
+        <ng-container matColumnDef="produit">
+            <mat-header-cell *matHeaderCellDef> Produit </mat-header-cell>
+            <mat-cell *matCellDef="let alert"> {{ alert.produitId.nom }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quantite">
+            <mat-header-cell *matHeaderCellDef> Quantité </mat-header-cell>
+            <mat-cell *matCellDef="let alert"> {{ alert.quantite }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="seuilAlert">
+            <mat-header-cell *matHeaderCellDef> Seuil d'Alerte </mat-header-cell>
+            <mat-cell *matCellDef="let alert"> {{ alert.seuilAlert }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <p *ngIf="alerts.length === 0">Aucune alerte de stock pour le moment</p>
+</div>
